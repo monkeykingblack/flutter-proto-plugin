@@ -134,11 +134,11 @@ pub fn locate_executables(
         exes: HashMap::from_iter([
             (
                 "flutter".into(),
-                ExecutableConfig::new_primary(env.os.get_exe_name("bin/flutter")),
+                ExecutableConfig::new_primary(env.os.get_file_name("bin/flutter", "bat")),
             ),
             (
                 "dart".into(),
-                ExecutableConfig::new(env.os.get_exe_name("bin/dart")),
+                ExecutableConfig::new(env.os.get_file_name("bin/dart", "bat")),
             ),
         ]),
         globals_lookup_dirs: vec!["$HOME/.pub-cache/bin".into()],
