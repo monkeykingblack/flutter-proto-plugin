@@ -3,8 +3,12 @@ use proto_pdk_test_utils::*;
 mod flutter_toole {
     use super::*;
 
-    generate_resolve_versions_tests!("flutter-test", {});
-
+    generate_resolve_versions_tests!("flutter-test", {
+        "0.4" => "0.4.0",
+        "0.5.1" => "0.5.1",
+        "1.1.0" => "1.1.0",
+    });
+    
     #[tokio::test(flavor = "multi_thread")]
     async fn load_versions_from_git() {
         let sandbox = create_empty_proto_sandbox();

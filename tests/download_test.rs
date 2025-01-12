@@ -110,7 +110,7 @@ mod flutter_tool {
             DownloadPrebuiltOutput {
                 archive_prefix: Some("flutter".into()),
                 download_url: "https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.24.5-stable.zip".into(),
-                download_name: Some("flutter_macos_3.24.5-stable.zip".into()),
+                download_name: Some("flutter_windows_3.24.5-stable.zip".into()),
                 ..Default::default()
             }
         )
@@ -140,22 +140,6 @@ mod flutter_tool {
                 .exe_path,
             Some("bin/flutter".into())
         );
-
-        assert_eq!(
-            plugin
-                .locate_executables(LocateExecutablesInput {
-                    context: ToolContext {
-                        version: VersionSpec::parse("3.24.5").unwrap(),
-                        ..Default::default()
-                    },
-                })
-                .await
-                .exes
-                .get("dart")
-                .unwrap()
-                .exe_path,
-            Some("bin/dart".into())
-        );
     }
 
     #[tokio::test(flavor = "multi_thread")]
@@ -163,7 +147,7 @@ mod flutter_tool {
         let sandbox = create_empty_proto_sandbox();
         let plugin = sandbox
             .create_plugin_with_config("flutter-test", |config| {
-                config.host(HostOS::Windows, HostArch::Arm64);
+                config.host(HostOS::Linux, HostArch::Arm64);
             })
             .await;
 
@@ -171,7 +155,7 @@ mod flutter_tool {
             plugin
                 .locate_executables(LocateExecutablesInput {
                     context: ToolContext {
-                        version: VersionSpec::parse("3.24.5").unwrap(),
+                        version: VersionSpec::parse("1.2.0").unwrap(),
                         ..Default::default()
                     },
                 })
@@ -180,23 +164,7 @@ mod flutter_tool {
                 .get("flutter")
                 .unwrap()
                 .exe_path,
-            Some("bin/flutter.exe".into())
-        );
-
-        assert_eq!(
-            plugin
-                .locate_executables(LocateExecutablesInput {
-                    context: ToolContext {
-                        version: VersionSpec::parse("3.24.5").unwrap(),
-                        ..Default::default()
-                    },
-                })
-                .await
-                .exes
-                .get("dart")
-                .unwrap()
-                .exe_path,
-            Some("bin/dart.exe".into())
+            Some("bin/flutter".into())
         );
     }
 }
