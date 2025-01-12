@@ -1,0 +1,2 @@
+[plugins]
+flutter-test = "file://./target/wasm32-wasip1/debug/flutter_tool.wasm"
