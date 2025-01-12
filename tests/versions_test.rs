@@ -4,9 +4,9 @@ mod flutter_toole {
     use super::*;
 
     generate_resolve_versions_tests!("flutter-test", {
-        "0.4" => "0.4.0",
-        "0.5.1" => "0.5.1",
-        "1.1.0" => "1.1.0",
+        "1.19" => "1.19.13",
+        "1.11" => "1.11.13",
+        "1.21.0" => "1.21.0",
     });
 
     #[tokio::test(flavor = "multi_thread")]
