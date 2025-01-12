@@ -8,7 +8,7 @@ mod flutter_toole {
         "0.5.1" => "0.5.1",
         "1.1.0" => "1.1.0",
     });
-    
+
     #[tokio::test(flavor = "multi_thread")]
     async fn load_versions_from_git() {
         let sandbox = create_empty_proto_sandbox();
