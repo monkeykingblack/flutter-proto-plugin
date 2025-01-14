@@ -24,6 +24,13 @@ Flutter plugin can be configured with a `.prototools` file.
 channel = "stable"
 ```
 
+
+Starting from version `v0.42` of Proto, [the results of HTTP requests are cached for 12 hours](https://moonrepo.dev/blog/proto-v0.42#other-changes). Therefore, to fetch version information for Flutter from different channels, you need to disable the caching feature of Proto.
+
+```shell
+PROTO_CACHE=off proto versions flutter
+```
+
 ## Hooks
 
 Flutter plugin does not support hooks.
