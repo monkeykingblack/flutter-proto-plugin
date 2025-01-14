@@ -80,6 +80,10 @@ pub fn load_versions(Json(_): Json<LoadVersionsInput>) -> FnResult<Json<LoadVers
         output.versions.push(version);
     }
 
+    output
+        .aliases
+        .insert("latest".into(), output.latest.clone().unwrap());
+
     Ok(Json(output))
 }
 
