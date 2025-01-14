@@ -207,7 +207,6 @@ pub fn locate_executables(
                 ExecutableConfig::new(env.os.get_file_name("bin/dart", "bat")),
             ),
         ]),
-        globals_lookup_dirs: vec!["$HOME/.pub-cache/bin".into()],
         ..LocateExecutablesOutput::default()
     }))
 }
