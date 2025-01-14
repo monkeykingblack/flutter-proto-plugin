@@ -1,9 +1,9 @@
 mod channel;
 mod config;
+mod release_response;
+
 #[cfg(feature = "wasm")]
 mod proto;
-
-mod release_response;
 
 pub use config::*;
 #[cfg(feature = "wasm")]
