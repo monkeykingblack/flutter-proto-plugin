@@ -1,16 +1,16 @@
-use std::{collections::HashMap, u32};
-
-use crate::{release_response::ReleaseResponse, FlutterPluginConfig};
+use std::collections::HashMap;
 
 use extism_pdk::*;
 use proto_pdk::*;
 use schematic::SchemaBuilder;
 use yaml_rust2::YamlLoader;
 
+use crate::config::FlutterPluginConfig;
+use crate::release_response::ReleaseResponse;
+
 #[host_fn]
 extern "ExtismHost" {
     fn exec_command(input: Json<ExecCommandInput>) -> Json<ExecCommandOutput>;
-    fn to_virtual_path(path: String) -> String;
 }
 
 static NAME: &str = "Flutter";
@@ -68,7 +68,19 @@ pub fn load_versions(Json(_): Json<LoadVersionsInput>) -> FnResult<Json<LoadVers
         .map(|r| r.version.to_owned())
         .collect::<Vec<_>>();
 
-    Ok(Json(LoadVersionsOutput::from(releases)?))
+    let mut output = LoadVersionsOutput::default();
+
+    for (index, item) in releases.iter().enumerate() {
+        let version = VersionSpec::parse(&item)?;
+
+        if index == 0 {
+            output.latest = Some(version.to_unresolved_spec());
+        }
+
+        output.versions.push(version);
+    }
+
+    Ok(Json(output))
 }
 
 #[plugin_fn]
