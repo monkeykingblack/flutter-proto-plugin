@@ -20,6 +20,7 @@ jobs:
         with:
           cache: false
           components: rustfmt
+          targets: wasm32-wasip1
       - run: cargo fmt --all --check
   lint:
     name: Lint
@@ -34,6 +35,7 @@ jobs:
         with:
           cache: false
           components: clippy
+          targets: wasm32-wasip1
       - run: cargo clippy --workspace --all-targets
   test:
     name: Test
@@ -48,6 +50,7 @@ jobs:
         with:
           bins: cargo-nextest
           cache: false
+          targets: wasm32-wasip1
       - uses: moonrepo/setup-toolchain@v0
       - uses: moonrepo/build-wasm-plugin@v0
       - run: cargo nextest run --no-default-features
